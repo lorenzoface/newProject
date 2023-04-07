@@ -1,5 +1,5 @@
 name: first deploy
-run-name: ${{ github.actor }} is doing a ${{ github.event_name}} on ${{ github.ref_name }}!
+run-name: ${{ github.actor }} is doing a ${{ github.event_name}} from ${{ github.event.pull_request.head.ref }} to ${{ github.event.pull_request.base.ref }}
 # Definition when the workflow should run
 on:
     #push
@@ -73,10 +73,10 @@ jobs:
             - name: 'Create delta packages for new, modified or deleted metadata'
               run: | 
                   mkdir changed-sources
-                  sfdx sgd:source:delta --to "HEAD" --from "origin/main" --output changed-sources/ --generate-delta --source force-app 
+                  sfdx sgd:source:delta --to "origin/${{ github.event.pull_request.base.ref }}" --from "origin/${{ github.event.pull_request.head.ref }}" --output changed-sources/ --generate-delta --source force-app 
                   echo "Delta identified:"
                   cat changed-sources/package/package.xml
         # Run basic deploy
             - name: 'Check-only deploy delta changes - run specified tests'
               run: |
-                  sfdx force:source:deploy -p "changed-sources/force-app" --json
+                  sfdx force:source:deploy -p "changed-sources/force-app" --json --checkonly --testlevel RunLocalTests  --json

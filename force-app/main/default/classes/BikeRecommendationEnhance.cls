@@ -13,6 +13,7 @@ global class BikeRecommendationEnhance {
 				if (inputRequest.isVelostarsMember)
                 {
                     //Apply a 10% discount for members
+                    //asdfasdf
                     inputRecommendation.Price__c = inputRecommendation.Price__c * 0.9;
                     
                 }
