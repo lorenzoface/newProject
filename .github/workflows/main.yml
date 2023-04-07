@@ -2,15 +2,15 @@ name: first deploy
 run-name: ${{ github.actor }} is doing a ${{ github.event_name}} on ${{ github.ref_name }}!
 # Definition when the workflow should run
 on:
-    push
+    #push
     # The workflow will run whenever an event happens on a pull request
-    #pull_request:
+    pull_request:
       # The events are that a PR is opened, or when a commit is pushed
       # to a branch that has an existing pull request
-      #types: [opened, synchronize]
+      types: [opened, synchronize]
       # The branches filter allows to specify that this workflow should only
       # run if the branch name is "develop". 
-      #branches: [ main, dev3 ]
+      branches: [ main, SIT]
       # We only care about changes to the force-app directory, which is the root directory of the sfdx project. 
       #paths:
         #- 'force-app/**'
@@ -73,7 +73,7 @@ jobs:
             - name: 'Create delta packages for new, modified or deleted metadata'
               run: | 
                   mkdir changed-sources
-                  sfdx sgd:source:delta --to "HEAD" --from "origin/${{ github.ref_name }}" --output changed-sources/ --generate-delta --source force-app 
+                  sfdx sgd:source:delta --to "HEAD" --from "origin/main" --output changed-sources/ --generate-delta --source force-app 
                   echo "Delta identified:"
                   cat changed-sources/package/package.xml
         # Run basic deploy
