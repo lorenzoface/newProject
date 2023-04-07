@@ -5,6 +5,7 @@ public class AIInserter {
         MLPredictionDefinition pd = pds.get(0);
         AIRecordInsight ri = new AIRecordInsight(MlPredictionDefinitionId=pd.Id,Confidence=0.2,RunGUID='93554231-ba4a-43fd-8a11-458330e76db9',RunStartTime=DateTime.now(),TargetField=objectName+'.'+fieldName,TargetId=objId,TargetSObjectType=objectName,Type='SingleValue');    
     	insert ri;
+        // useless comment
         
         Double dblRand = Math.random()*100.0;
         Integer rand = dblRand.intValue();
