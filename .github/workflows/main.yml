@@ -73,10 +73,10 @@ jobs:
             - name: 'Create delta packages for new, modified or deleted metadata'
               run: | 
                   mkdir changed-sources
-                  sfdx sgd:source:delta --to "origin/${{ github.event.pull_request.base.ref }}" --from "origin/${{ github.event.pull_request.head.ref }}" --output changed-sources/ --generate-delta --source force-app --checkonly --testlevel RunLocalTests  --json
+                  sfdx sgd:source:delta --to "origin/${{ github.event.pull_request.base.ref }}" --from "origin/${{ github.event.pull_request.head.ref }}" --output changed-sources/ --generate-delta --source force-app 
                   echo "Delta identified:"
                   cat changed-sources/package/package.xml
         # Run basic deploy
             - name: 'Check-only deploy delta changes - run specified tests'
               run: |
-                  sfdx force:source:deploy -p "changed-sources/force-app" --json
+                  sfdx force:source:deploy -p "changed-sources/force-app" --json --checkonly --testlevel RunLocalTests  --json
