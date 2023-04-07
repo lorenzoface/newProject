@@ -1,5 +1,5 @@
 name: first deploy
-run-name: ${{ github.actor }} is doing a ${{ github.event_name}} on ${{ github.ref }}!
+run-name: ${{ github.actor }} is doing a ${{ github.event_name}} on ${{ github.ref_name }}!
 # Definition when the workflow should run
 on:
     push
@@ -73,7 +73,7 @@ jobs:
             - name: 'Create delta packages for new, modified or deleted metadata'
               run: | 
                   mkdir changed-sources
-                  sfdx sgd:source:delta --to "HEAD" --from "origin/${{ github.ref }}" --output changed-sources/ --generate-delta --source force-app 
+                  sfdx sgd:source:delta --to "HEAD" --from "origin/${{ github.ref_name }}" --output changed-sources/ --generate-delta --source force-app 
                   echo "Delta identified:"
                   cat changed-sources/package/package.xml
         # Run basic deploy
