@@ -1,5 +1,5 @@
 name: first deploy
-run-name: ${{ github.actor }} is doing a ${{ github.event_name}} from ${{ github.event.pull_request.head.label }} to ${{ github.event.pull_request.base.label }} (dev version)
+run-name: ${{ github.actor }} is doing a ${{ github.event_name}} from ${{ github.event.pull_request.head.ref }} to ${{ github.event.pull_request.base.ref }} (dev version)
 # Definition when the workflow should run
 on:
     #push
