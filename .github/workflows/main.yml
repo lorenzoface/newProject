@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: first deploy
 run-name: ${{ github.actor }} is deploying stuff!
 # Definition when the workflow should run
 on:
